@@ -39,13 +39,13 @@
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="70dp"
-                android:src="@drawable/img_upload_ic" />
+                android:src="@drawable/uploadimg" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Capture Images From Here"
-                android:textColor="#5EB4FF"
+                android:textColor="@color/purple_700"
                 android:textSize="16dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -53,13 +53,13 @@
 
     <ImageView
         android:id="@+id/imageviewmain"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:scaleType="centerCrop"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,15 +95,19 @@
         android:maxLength="2000"
         android:maxLines="6"
         android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/subBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/subBtn"
         android:layout_width="match_parent"
+        android:backgroundTint="@color/purple_700"
         android:layout_height="60dp"
+        android:textSize="17dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:text="Submit"

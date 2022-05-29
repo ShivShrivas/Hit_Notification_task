@@ -1,11 +1,18 @@
 package com.example.luneblazetask;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +42,12 @@ int info=0;
 
         ActivityMain2Binding activityMain2Binding= DataBindingUtil.setContentView(this,R.layout.activity_main2);
         Intent i=getIntent();
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel=new NotificationChannel("Shiv","Shiv",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager=getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
+        }
 try {
     myUri = Uri.parse(i.getStringExtra("KEY"));
 }catch (Exception e){
@@ -77,6 +90,8 @@ try {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                             Log.d("TAG", "onResponse: "+response.body());
+
+                            generateNotofication();
                         }
 
                         @Override
@@ -92,5 +107,21 @@ try {
                 }
             }
         });
+    }
+
+    private void generateNotofication() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"Shiv")
+                        .setSmallIcon(R.drawable.book_ic2)
+                        .setContentTitle("Luneblaze Notification")
+                        .setContentText("Notification for informative button click");
+        Intent notificationIntent = new Intent(this, MainActivity2.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        NotificationManagerCompat managerCompat=NotificationManagerCompat.from(MainActivity2.this);
+        managerCompat.notify(0, builder.build());
+//        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        manager.notify(0, builder.build());
     }
 }

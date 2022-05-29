@@ -144,12 +144,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("CameraCode", "" + 7);
                     Bundle bundle = data.getExtras();
                     bitmap = (Bitmap) bundle.get("data");
-
+                    bindingUtil.imageviewmain.setVisibility(View.VISIBLE);
                     bindingUtil.imageviewmain.setImageBitmap(bitmap);
                     break;
                 case 9:
                     Log.i("GalleryCode", "" + requestCode);
                      ImageURI = data.getData();
+                    bindingUtil.imageviewmain.setVisibility(View.VISIBLE);
                     bindingUtil.imageviewmain.setImageURI(ImageURI);
                     break;
             }
